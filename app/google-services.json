@@ -1,0 +1,68 @@
+{
+  "project_info": {
+    "project_number": "370247516367",
+    "project_id": "blinder-reads",
+    "storage_bucket": "blinder-reads.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:370247516367:android:f5b4b1dc438c2eae8ab7ba",
+        "android_client_info": {
+          "package_name": "Com.blinder.blinderreads"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "370247516367-bs7b5alant364k4klrpqp56rn9cqkhjr.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCiaiwNsrcgJcD1Qyg8UUR9j0M5j9pgyug"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "370247516367-bs7b5alant364k4klrpqp56rn9cqkhjr.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:370247516367:android:9beed2d35f31bf748ab7ba",
+        "android_client_info": {
+          "package_name": "com.example.datingapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "370247516367-bs7b5alant364k4klrpqp56rn9cqkhjr.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCiaiwNsrcgJcD1Qyg8UUR9j0M5j9pgyug"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "370247516367-bs7b5alant364k4klrpqp56rn9cqkhjr.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
