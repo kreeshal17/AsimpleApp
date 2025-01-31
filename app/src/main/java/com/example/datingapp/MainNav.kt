@@ -5,6 +5,7 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.example.datingapp.Screen.Setup
 import com.example.datingapp.Screen.SignIn
 import com.example.datingapp.Screen.constant
 import com.example.datingapp.Screen.constant.home
@@ -31,6 +32,12 @@ fun MainNav(modifier:Modifier=Modifier,authViewModel: AuthViewModel)
         {
             SignIn(modifier,authViewModel,navController)
         }
+
+        composable(constant.SetUp)
+        {
+            Setup(modifier,authViewModel,navController)
+        }
+
 
 
 

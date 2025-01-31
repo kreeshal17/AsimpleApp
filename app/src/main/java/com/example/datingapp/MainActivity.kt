@@ -15,10 +15,12 @@ import androidx.compose.ui.modifier.modifierLocalMapOf
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.datingapp.Screen.login
 import com.example.datingapp.ui.theme.DatingAppTheme
+import com.google.firebase.FirebaseApp
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        FirebaseApp.initializeApp(this)
         enableEdgeToEdge()
         val viewModel:AuthViewModel by  viewModels()
         setContent {

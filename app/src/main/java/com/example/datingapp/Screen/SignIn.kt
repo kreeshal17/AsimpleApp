@@ -1,16 +1,24 @@
 package com.example.datingapp.Screen
 
+import android.net.Uri
 import android.widget.Toast
+import androidx.activity.compose.rememberLauncherForActivityResult
+import androidx.activity.result.PickVisualMediaRequest
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.core.tween
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Face
 import androidx.compose.material.icons.outlined.Face
@@ -19,18 +27,23 @@ import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.OutlinedTextField
+import androidx.compose.material3.RadioButton
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
+import androidx.compose.runtime.mutableIntStateOf
+import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontStyle
@@ -39,12 +52,21 @@ import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+import coil.compose.AsyncImage
 import com.example.datingapp.AuthEvent
 import com.example.datingapp.AuthViewModel
+
+import androidx.compose.runtime.mutableStateListOf
+import androidx.compose.runtime.remember
 
 @Composable
 fun SignIn(modifier: Modifier=Modifier, authViewModel: AuthViewModel, navController: NavController)
 {
+
+
+
+
+
 
 
     var authstate=authViewModel.authstate.observeAsState()
@@ -62,12 +84,15 @@ fun SignIn(modifier: Modifier=Modifier, authViewModel: AuthViewModel, navControl
     var password by remember {
         mutableStateOf("")
     }
+
+
+
     val context= LocalContext.current
     // Just place the CircularProgressIndicator in the composable hierarchy
     when (val authState = authstate.value) {
         is AuthEvent.Aunthenticated -> {
             LaunchedEffect(authState) {
-                navController.navigate(constant.home)
+                navController.navigate(constant.SetUp)
             }
         }
         is AuthEvent.Error -> {
@@ -76,7 +101,7 @@ fun SignIn(modifier: Modifier=Modifier, authViewModel: AuthViewModel, navControl
             }
         }
         is AuthEvent.Loading -> {
-            CircularProgressIndicator(modifier = Modifier.fillMaxSize())  // You can add modifier to center if needed
+            CircularProgressIndicator(modifier = Modifier.fillMaxWidth())  // You can add modifier to center if needed
         }
         else -> null
     }
@@ -97,10 +122,15 @@ fun SignIn(modifier: Modifier=Modifier, authViewModel: AuthViewModel, navControl
 
 
         ) {
-            Text(text="Sign-Up page", style = TextStyle(color = Color.Blue, fontStyle= FontStyle.Normal, fontSize = 40.sp))
+            Text(text="Sign In Details", style = TextStyle(color = Color.Blue, fontStyle= FontStyle.Normal, fontSize = 20.sp))
 
         }
+
         Spacer(modifier = Modifier.height(25.dp))
+
+
+
+
         OutlinedTextField(value = email, onValueChange = {email=it},
             label = {
                 Text(text="enter your email address")
@@ -134,7 +164,7 @@ fun SignIn(modifier: Modifier=Modifier, authViewModel: AuthViewModel, navControl
 
 
         TextButton(onClick = {
-            navController.navigate(constant.signin)
+            navController.navigate(constant.login)
         }) {
             Text(text = "Already have an account? Log-In")
 

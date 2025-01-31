@@ -5,6 +5,7 @@ val home="home"
 
    val signin="signin"
    val login ="login"
+   val SetUp="setup"
 
 
 }

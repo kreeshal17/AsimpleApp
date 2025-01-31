@@ -1,11 +1,16 @@
 package com.example.datingapp.Screen
 
 import android.widget.Toast
+import androidx.compose.ui.res.painterResource
+
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.core.tween
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -29,17 +34,23 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.graphics.Color
+
+
 import androidx.compose.ui.platform.LocalContext
+
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.compose.ui.layout.ContentScale
 import androidx.navigation.NavController
 import com.example.datingapp.AuthEvent
 import com.example.datingapp.AuthViewModel
+import com.example.datingapp.R
 
 
 @Composable
@@ -76,76 +87,100 @@ fun login(modifier: Modifier=Modifier,authViewModel: AuthViewModel,navController
 
 
  }
+    Box(
+        modifier = Modifier
+            .fillMaxSize()
 
-    Column(modifier= modifier
-        .fillMaxSize()
-        .padding(vertical = 20.dp),
+
+
+    )
+    {
+        Image(
+            painter = painterResource(id = R.drawable.bg),
+            contentDescription = null,
+            contentScale = ContentScale.Crop,
+        modifier = Modifier.fillMaxSize().alpha(0.5f),
+
+        )
+
+    Column(modifier= modifier.run {
+        fillMaxSize()
+
+
+        .padding(vertical = 20.dp)
+    },
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally) {
 
-        AnimatedVisibility(visible = show,
+        AnimatedVisibility(
+            visible = show,
             enter = fadeIn(animationSpec = tween(durationMillis = 1000)),
             exit = fadeOut(animationSpec = tween(durationMillis = 5000))
 
 
-
-            ) {
-            Text(text="Login page", style = TextStyle(color = Color.Blue, fontStyle=FontStyle.Normal, fontSize = 40.sp))
+        ) {
+            Text(
+                text = "Login page",
+                style = TextStyle(
+                    color = Color.Blue,
+                    fontStyle = FontStyle.Normal,
+                    fontSize = 40.sp
+                )
+            )
 
         }
         Spacer(modifier = Modifier.height(25.dp))
-             OutlinedTextField(value = email, onValueChange = {email=it},
-                 label = {
-                     Text(text="enter your email address")
-                 })
-
-            Spacer(modifier = Modifier.height(12.dp))
-        OutlinedTextField(value = password, onValueChange = {password=it},
+        OutlinedTextField(value = email, onValueChange = { email = it },
             label = {
-                Text(text="enter your passsword")},
+                Text(text = "enter your email address")
+            })
 
-                  visualTransformation = if(eye)  VisualTransformation.None else PasswordVisualTransformation()
+        Spacer(modifier = Modifier.height(12.dp))
+        OutlinedTextField(value = password, onValueChange = { password = it },
+            label = {
+                Text(text = "enter your passsword")
+            },
 
-                   ,
+            visualTransformation = if (eye) VisualTransformation.None else PasswordVisualTransformation(),
             trailingIcon = {
-                var image= if (eye) Icons.Filled.Face else Icons.Outlined.Face
+                var image = if (eye) Icons.Filled.Face else Icons.Outlined.Face
 
-                IconButton(onClick = {eye=!eye}) {
+                IconButton(onClick = { eye = !eye }) {
                     Icon(imageVector = image, contentDescription = null)
 
                 }
             }
-            )
+        )
 
         Spacer(modifier = Modifier.height(30.dp))
-        Button(onClick = {authViewModel.login(email,password)}) {
-            Text(text="Log -In")
+        Button(onClick = { authViewModel.login(email, password) }) {
+            Text(text = "Log -In")
 
         }
         Spacer(modifier = Modifier.height(10.dp))
 
 
-     TextButton(onClick = {
-         navController.navigate(constant.signin)
-     }) {
-         Text(text = "Don't have an account? Sign-Up")
+        TextButton(onClick = {
+            navController.navigate(constant.signin)
+        }) {
+            Text(text = "Don't have an account? Sign-Up")
 
-     }
+        }
         Spacer(modifier = Modifier.height(25.dp))
 
-         TextButton(onClick = { if(email.isNotEmpty()) {
-             authViewModel.forgotPassword(email)
-         } else
-         {
-             Toast.makeText(context,"enter email first",Toast.LENGTH_SHORT).show()
-         }
-         }) {
-             Text(text="Forgot password?")
+        TextButton(onClick = {
+            if (email.isNotEmpty()) {
+                authViewModel.forgotPassword(email)
+            } else {
+                Toast.makeText(context, "enter email first", Toast.LENGTH_SHORT).show()
+            }
+        }) {
+            Text(text = "Forgot password?")
 
-         }
+        }
 
 
-
+    }
 
     }
 
