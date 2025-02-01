@@ -4,6 +4,7 @@ import android.app.DatePickerDialog
 import android.content.Context
 import android.net.Uri
 import android.widget.DatePicker
+import android.widget.Toast
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.PickVisualMediaRequest
 import androidx.activity.result.contract.ActivityResultContracts
@@ -214,8 +215,27 @@ fun Setup(modifier: Modifier = Modifier, authViewModel: AuthViewModel, navContro
 
             Spacer(modifier = Modifier.padding(20.dp))
             Button(
-                onClick = { navController.navigate(constant.home) },
-                enabled = age > 18 // This enables the button only if age > 18
+                onClick = {
+
+                    if(selectedImage!=null && age >= 18)
+                    {
+
+                        authViewModel.uploadImageAndSaveUserData(FirstName,LastName,age,items[selectIndex].label,selectedImage,context)
+//                                     navController.navigate(constant.home)
+
+                    }
+                    else
+                    {
+                        Toast.makeText(context,"something went wrong",Toast.LENGTH_SHORT).show()
+                    }
+
+
+                    navController.navigate(constant.home)
+
+
+
+                          },
+                enabled = age > 18 && selectedImage!=null
             ) {
                 Text(text = "Click to confirm that You agree with our necessary terms and Conditions")
             }

@@ -25,12 +25,12 @@ import com.example.datingapp.R
 @Composable
 fun home(modifier: Modifier = Modifier, authViewModel: AuthViewModel, navController: NavController) {
 
-    val authstate= authViewModel.authstate.observeAsState()
+    val authstate= authViewModel.authState.observeAsState()
     val context= LocalContext.current
     LaunchedEffect(authstate.value) {
         when(authstate.value)
         {
-           is  AuthEvent.unAuthenticated -> navController.navigate(constant.login)
+           is  AuthEvent.Unauthenticated -> navController.navigate(constant.login)
 
             is AuthEvent.Error -> Toast.makeText(context,(authstate.value as AuthEvent.Error).message,Toast.LENGTH_SHORT).show()
             else->null
@@ -54,7 +54,7 @@ fun home(modifier: Modifier = Modifier, authViewModel: AuthViewModel, navControl
             BottomAppBar (
                 actions = {
 
-                       TextButton(onClick = {authViewModel.signout() }) {
+                       TextButton(onClick = {authViewModel.signOut() }) {
                            Text(text= "Log-out")
 
                        }

@@ -69,7 +69,7 @@ fun SignIn(modifier: Modifier=Modifier, authViewModel: AuthViewModel, navControl
 
 
 
-    var authstate=authViewModel.authstate.observeAsState()
+    var authstate=authViewModel.authState.observeAsState()
 
 
     var show = remember { true
@@ -90,7 +90,7 @@ fun SignIn(modifier: Modifier=Modifier, authViewModel: AuthViewModel, navControl
     val context= LocalContext.current
     // Just place the CircularProgressIndicator in the composable hierarchy
     when (val authState = authstate.value) {
-        is AuthEvent.Aunthenticated -> {
+        is AuthEvent.Authenticated -> {
             LaunchedEffect(authState) {
                 navController.navigate(constant.SetUp)
             }

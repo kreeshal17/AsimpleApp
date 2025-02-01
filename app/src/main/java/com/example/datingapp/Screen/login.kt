@@ -56,7 +56,7 @@ import com.example.datingapp.R
 @Composable
 fun login(modifier: Modifier=Modifier,authViewModel: AuthViewModel,navController: NavController)
 {
-    var authstate=authViewModel.authstate.observeAsState()
+    var authstate=authViewModel.authState.observeAsState()
 
 
     var show = remember { true
@@ -75,7 +75,7 @@ fun login(modifier: Modifier=Modifier,authViewModel: AuthViewModel,navController
  LaunchedEffect(authstate.value) {
      when(authstate.value)
      {
-      is   AuthEvent.Aunthenticated -> navController.navigate(constant.home)
+      is   AuthEvent.Authenticated -> navController.navigate(constant.home)
          is AuthEvent.Error -> Toast.makeText(context,(authstate.value as AuthEvent.Error).message,Toast.LENGTH_SHORT).show()
          is AuthEvent.Success -> Toast.makeText(
              context,
@@ -161,7 +161,7 @@ fun login(modifier: Modifier=Modifier,authViewModel: AuthViewModel,navController
 
 
         TextButton(onClick = {
-            navController.navigate(constant.signin)
+            navController.navigate(constant.SetUp)
         }) {
             Text(text = "Don't have an account? Sign-Up")
 
